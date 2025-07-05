@@ -4,11 +4,11 @@
   "description": "Senior front-end engineer with 9+ years of experience in scalable architecture and modern web application development.",
   "about": {
     "paragraph1": "I'm a Senior Software Engineer with over 9 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
-    "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and implementing security and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, and pushing the boundaries of what frontend engineering can do."
+    "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, and pushing the boundaries of what frontend engineering can do."
   },
   "social": {
     "github": {
-      "url": "https://github.com/TusharVelotio",
+      "url": "https://github.com/tusharTibude93",
       "label": "GitHub"
     },
     "gitlab": {
@@ -63,10 +63,6 @@
         "icon": "Atom"
       },
       {
-        "name": "React Native",
-        "icon": "Smartphone"
-      },
-      {
         "name": "Next.js",
         "icon": "ArrowRight"
       },
@@ -115,10 +111,6 @@
       {
         "name": "Jest",
         "icon": "TestTube"
-      },
-      {
-        "name": "React Testing Library",
-        "icon": "Beaker"
       },
       {
         "name": "Docker",
@@ -212,10 +204,36 @@
       }
     }
   ],
+  "hobbies": [
+    {
+      "name": "Swimming",
+      "icon": "Swim"
+    },
+    {
+      "name": "Cycling",
+      "icon": "Bike"
+    },
+    {
+      "name": "Gardening",
+      "icon": "Plant"
+    },
+    {
+      "name": "Traveling",
+      "icon": "Globe"
+    },
+    {
+      "name": "Health & Fitness",
+      "icon": "Heart"
+    },
+    {
+      "name": "Family & Baby",
+      "icon": "Baby"
+    }
+  ],
   "contact": {
     "title": "Get In Touch",
     "description": "I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together!",
-    "email": "tushar.tibude@example.com"
+    "email": "tush.tibude@gmail.com"
   },
   "footer": {
     "copyright": "© 2024 Tushar Tibude. All rights reserved."

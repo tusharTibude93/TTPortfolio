@@ -30,7 +30,12 @@ import {
   Cpu,
   Activity,
   Users, 
-  Kanban
+  Kanban,
+  Waves,
+  Bike,
+  Sprout,
+  Globe,
+  Heart
 } from "lucide-react";
 
 // Icon mapping object
@@ -62,8 +67,14 @@ const iconMap = {
   Phone,
   Cpu,
   Activity,
-  Users,
-  Kanban
+  Users, 
+  Kanban,
+  Swim: Waves,
+  Bike,
+  Plant: Sprout,
+  Globe,
+  Heart,
+  Baby: Heart
 };
 
 export default function Home() {
@@ -79,6 +90,7 @@ export default function Home() {
             <div className="hidden md:flex space-x-8">
               <a href="#about" className="text-slate-600 hover:text-blue-600 transition-colors">About</a>
               <a href="#skills" className="text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
+              <a href="#hobbies" className="text-slate-600 hover:text-blue-600 transition-colors">Hobbies</a>
               <a href="#projects" className="text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
               <Link href="/resume" className="text-slate-600 hover:text-blue-600 transition-colors">Resume</Link>
               <a href="#contact" className="text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
@@ -243,6 +255,26 @@ export default function Home() {
                 })}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hobbies Section */}
+      <section id="hobbies" className="py-16 px-10 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">Hobbies & Interests</h2>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-6 gap-3">
+            {personalData.hobbies.map((hobby, index) => {
+              const IconComponent = iconMap[hobby.icon as keyof typeof iconMap];
+              return (
+                <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-xl shadow-lg border border-blue-200 hover:shadow-xl transition-shadow">
+                  <div className="flex flex-col items-center text-center">
+                    <IconComponent className="w-8 h-8 text-blue-600 mb-3" />
+                    <h3 className="text-lg font-semibold text-slate-800">{hobby.name}</h3>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
