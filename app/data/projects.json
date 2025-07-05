@@ -1,0 +1,252 @@
+[
+  {
+    "id": 1,
+    "title": "NetApp - Spot Connect",
+    "company": "NetApp",
+    "role": "Senior UI Engineer",
+    "duration": "2023 - Present",
+    "description": "Spot Connect allows users to visually orchestrate infrastructure automation flows with a powerful editor. These flows perform logical operations and actions across tools and cloud environments.",
+    "responsibilities": [
+      "Led frontend architecture in a micro-frontend environment using React",
+      "Built and maintained reusable UI components with thorough unit tests",
+      "Owned sprint planning, ticket creation, and task distribution for the UI team",
+      "Conducted daily standups to monitor progress and unblock team members",
+      "Integrated Blackduck and CodeQL to automate security scanning in CI/CD"
+    ],
+    "techStack": ["React", "Redux", "SCSS", "Jest", "GitHub Actions"],
+    "color": "blue"
+  },
+  {
+    "id": 2,
+    "title": "TrilioVault",
+    "company": "TrilioVault",
+    "role": "Senior UI Engineer",
+    "duration": "2022 - 2023",
+    "description": "TrilioVault is a Kubernetes-native backup and recovery solution designed for scalable, hybrid cloud infrastructure.",
+    "responsibilities": [
+      "Designed and implemented UI architecture from scratch",
+      "Developed features for backup and restore workflows using React",
+      "Built multi-cluster login and session isolation for secure access",
+      "Integrated WebSockets for live state synchronization in Redux",
+      "Handled complex Kubernetes API integrations directly from UI",
+      "Performed detailed peer reviews for code quality and performance"
+    ],
+    "techStack": ["React", "Redux", "SCSS", "Highcharts", "JWT", "WebSocket"],
+    "color": "green"
+  },
+  {
+    "id": 3,
+    "title": "Capitalmind",
+    "company": "Capitalmind",
+    "role": "UI Lead Engineer",
+    "duration": "2021 - 2022",
+    "description": "Capitalmind is a platform for researching, analyzing, and comparing Indian mutual funds and investment strategies.",
+    "responsibilities": [
+      "Built mutual funds web application with React and Next.js",
+      "Converted detailed Figma designs into responsive UIs",
+      "Implemented edge caching and SSR with Next.js for performance",
+      "Created component library on top of Mantine",
+      "Used React Query for efficient server-side data hydration",
+      "Led UI team with PR reviews and cross-team coordination"
+    ],
+    "techStack": ["NextJS", "React", "Redux", "SCSS", "Mantine", "SSR"],
+    "color": "purple"
+  },
+  {
+    "id": 4,
+    "title": "Looking Point - Acela Portal",
+    "company": "Looking Point",
+    "role": "UI Lead Engineer",
+    "duration": "2020 - 2025",
+    "description": "Acela Portal is a centralized enterprise platform for managing IT lifecycle, inventory, and assets, now rebuilt using modern UI architecture with React 19 and Tailwind CSS.",
+    "responsibilities": [
+      "Led frontend architecture and design for enterprise IT management portal",
+      "Created dynamic UI components and forms powered by JSON schemas",
+      "Built modules for asset lifecycle tracking, support renewals, and inventory management",
+      "Developed document editor with markdown support for dynamic SOW generation",
+      "Rebuilt frontend using React 19, Tailwind CSS, and shadcn/ui for consistent design system",
+      "Built and maintained a cross-platform Electron-based desktop client",
+      "Managed the UI team, conducted sprint planning, code reviews, and dependency updates"
+    ],
+    "techStack": [
+      "React 19",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Redux",
+      "ElectronJS",
+      "ChartsJS",
+      "Markdown Editor"
+    ],
+    "color": "orange"
+  },
+  {
+    "id": 13,
+    "title": "PlayFi - Linux TV App",
+    "company": "PlayFi",
+    "role": "UI Engineer",
+    "duration": "2024 - 2025",
+    "description": "PlayFi is a custom-built media application developed for Linux-based Smart TVs using Electron, offering a fullscreen app-like experience with D-pad remote control support.",
+    "responsibilities": [
+      "Developed and optimized an Electron-based Smart TV application for Linux",
+      "Implemented remote control navigation using custom React hooks and keyboard events",
+      "Scaled media and font sizes responsively using vw/vh units and CSS flex layouts",
+      "Ensured consistent fullscreen rendering without relying on zoom levels"
+    ],
+    "techStack": ["Electron", "React", "HTML5", "CSS3", "Node.js"],
+    "color": "teal"
+  },
+  {
+    "id": 5,
+    "title": "Jobility",
+    "company": "Jobility",
+    "role": "UI Engineer",
+    "duration": "2019 - 2020",
+    "description": "Jobility is an on-demand job marketplace for companies and gig workers, featuring dedicated portals for workers, employers, and admins.",
+    "responsibilities": [
+      "Built scalable frontends for worker, admin, and super admin portals",
+      "Implemented access-based reusable components using React",
+      "Integrated WebSocket-based real-time notifications",
+      "Collaborated closely with backend on API contracts",
+      "Wrote unit and integration tests to ensure application quality"
+    ],
+    "techStack": ["React", "WebSocket", "Unit Testing", "Integration Testing"],
+    "color": "indigo"
+  },
+  {
+    "id": 6,
+    "title": "Luxury Presence",
+    "company": "Luxury Presence",
+    "role": "UI Engineer",
+    "duration": "2018 - 2019",
+    "description": "Luxury Presence provides real estate professionals with customizable websites and marketing tools.",
+    "responsibilities": [
+      "Built reusable UI components in Angular for real estate site builder",
+      "Developed configurable component settings accessible from dashboard",
+      "Contributed to new dashboard platform for owners, admins, and super admins",
+      "Architected base code structure and layout templates",
+      "Implemented Google Analytics dashboards for tracking user interactions"
+    ],
+    "techStack": [
+      "AngularJS",
+      "Node.js",
+      "HTML5",
+      "CSS3",
+      "SCSS",
+      "TypeScript"
+    ],
+    "color": "pink"
+  },
+  {
+    "id": 7,
+    "title": "Auto Gear",
+    "company": "Auto Gear",
+    "role": "UI Engineer",
+    "duration": "2017 - 2018",
+    "description": "Auto Gear offers cross-platform apps that help users access and manage automotive information across devices.",
+    "responsibilities": [
+      "Built responsive apps based on functional prototypes and high-fidelity designs",
+      "Established best practices for scalable frontend architecture",
+      "Ensured graceful degradation for older browsers (including IE)",
+      "Explored emerging frontend tools and methodologies",
+      "Implemented test-driven development and E2E test coverage",
+      "Applied security practices across the UI layer"
+    ],
+    "techStack": ["Angular 2", "MySQL", "Responsive Design"],
+    "color": "teal"
+  },
+  {
+    "id": 8,
+    "title": "Smart City",
+    "company": "Smart City",
+    "role": "Software Engineer",
+    "duration": "2016 - 2017",
+    "description": "Smart City app enables citizens to report urban issues via mobile and web platforms, driving civic engagement.",
+    "responsibilities": [
+      "Built scalable web modules for citizen complaints and issue tracking",
+      "Involved in all stages of the software lifecycle",
+      "Wrote maintainable, testable code with strong performance",
+      "Ensured UI/UX aligned with product specifications",
+      "Participated in regular releases and versioning of components",
+      "Researched modern technologies for continuous improvement"
+    ],
+    "techStack": [
+      "Java",
+      "JSP",
+      "Servlet",
+      "JavaScript",
+      "Angular 2",
+      "Spring",
+      "MySQL"
+    ],
+    "color": "cyan"
+  },
+  {
+    "id": 9,
+    "title": "Transport War",
+    "company": "Transport War",
+    "role": "Software Engineer",
+    "duration": "2015 - 2016",
+    "description": "Transport War connects users with trusted logistics providers who can competitively bid on shipping requests.",
+    "responsibilities": [
+      "Developed scalable modules for shipment bidding and logistics workflows",
+      "Wrote and maintained unit and functional tests",
+      "Automated deployment processes and CI scripts",
+      "Built UI modules using AngularJS",
+      "Collaborated with product owners to finalize requirements",
+      "Resolved bugs and conducted root cause analysis"
+    ],
+    "techStack": [
+      "Java",
+      "JSP",
+      "Servlet",
+      "JavaScript",
+      "Angular 2",
+      "Spring",
+      "MySQL"
+    ],
+    "color": "amber"
+  },
+  {
+    "id": 10,
+    "title": "Orion",
+    "company": "Orion",
+    "role": "Software Engineer",
+    "duration": "2014 - 2015",
+    "description": "Orion is a moderation platform for reviewing and managing image content across dating and social platforms.",
+    "responsibilities": [
+      "Developed AngularJS-based moderation tools for Admin and Moderator roles",
+      "Built reusable components for image review workflows",
+      "Implemented multi-page layouts and dynamic UI rendering",
+      "Worked on early-stage prototypes and validation",
+      "Collaborated with design teams on alternate UI concepts",
+      "Coordinated across QA, web, and content teams"
+    ],
+    "techStack": ["AngularJS", "HTML5", "MySQL"],
+    "color": "lime"
+  },
+  {
+    "id": 11,
+    "title": "Blockpath",
+    "company": "Blockpath",
+    "role": "Software Engineer",
+    "duration": "2013 - 2014",
+    "description": "Blockpath offers a visual interface for exploring blockchain transactions with advanced filtering capabilities.",
+    "responsibilities": [
+      "Developed UI for blockchain address and transaction explorer",
+      "Built POC features based on evolving product requirements",
+      "Created multiple pages with interactive data views",
+      "Implemented early prototypes of data filtering features",
+      "Proposed and developed alternate UI options using AngularJS and HTML5"
+    ],
+    "techStack": [
+      "JavaScript",
+      "CSS",
+      "Bootstrap",
+      "jQuery",
+      "Backbone.js",
+      "Python",
+      "d3"
+    ],
+    "color": "emerald"
+  }
+]

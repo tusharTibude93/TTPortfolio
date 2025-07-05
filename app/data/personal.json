@@ -1,0 +1,223 @@
+{
+  "name": "Tushar Tibude",
+  "title": "Software Engineer",
+  "description": "Senior front-end engineer with 9+ years of experience in scalable architecture and modern web application development.",
+  "about": {
+    "paragraph1": "I'm a Senior Software Engineer with over 9 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
+    "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and implementing security and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, and pushing the boundaries of what frontend engineering can do."
+  },
+  "social": {
+    "github": {
+      "url": "https://github.com/TusharVelotio",
+      "label": "GitHub"
+    },
+    "gitlab": {
+      "url": "https://gitlab.com/tushar.tibude",
+      "label": "GitLab"
+    },
+    "linkedin": {
+      "url": "https://linkedin.com/in/tushar-tibude",
+      "label": "Connect on LinkedIn"
+    }
+  },
+  "achievements": [
+    {
+      "icon": "🏆",
+      "text": "Awarded 'Superstar of the Quarter' at Velotio for exceptional project contributions"
+    },
+    {
+      "icon": "📚",
+      "text": "Completed 'Advanced React Patterns' – mastering hooks, context, and performance optimizations"
+    },
+    {
+      "icon": "🛠️",
+      "text": "Led architecture setup and end-to-end development of web applications using React"
+    },
+    {
+      "icon": "🎓",
+      "text": "Earned a Bachelor's Degree in Computer Engineering"
+    }
+  ],
+  "skills": {
+    "languages": [
+      {
+        "name": "JavaScript",
+        "icon": "Code"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "FileText"
+      },
+      {
+        "name": "HTML5",
+        "icon": "FileCode"
+      },
+      {
+        "name": "CSS3",
+        "icon": "Palette"
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "React",
+        "icon": "Atom"
+      },
+      {
+        "name": "React Native",
+        "icon": "Smartphone"
+      },
+      {
+        "name": "Next.js",
+        "icon": "ArrowRight"
+      },
+      {
+        "name": "Redux Toolkit",
+        "icon": "Database"
+      },
+      {
+        "name": "TanStack Query",
+        "icon": "Filter"
+      },
+      {
+        "name": "shadcn/ui",
+        "icon": "Component"
+      },
+      {
+        "name": "Tailwind CSS",
+        "icon": "Wind"
+      },
+      {
+        "name": "Node.js",
+        "icon": "Server"
+      },
+      {
+        "name": "Angular",
+        "icon": "Circle"
+      }
+    ],
+    "tools": [
+      {
+        "name": "Git",
+        "icon": "GitBranch"
+      },
+      {
+        "name": "GitHub Actions",
+        "icon": "GitBranch"
+      },
+      {
+        "name": "Vite",
+        "icon": "Zap"
+      },
+      {
+        "name": "Webpack",
+        "icon": "Package"
+      },
+      {
+        "name": "Jest",
+        "icon": "TestTube"
+      },
+      {
+        "name": "React Testing Library",
+        "icon": "Beaker"
+      },
+      {
+        "name": "Docker",
+        "icon": "Ship"
+      },
+      {
+        "name": "Electron",
+        "icon": "Monitor"
+      },
+      {
+        "name": "Figma",
+        "icon": "PenTool"
+      }
+    ],
+    "other": [
+      {
+        "name": "Architecture Design",
+        "icon": "Layout"
+      },
+      {
+        "name": "Microfrontend",
+        "icon": "Grid"
+      },
+      {
+        "name": "Code Review",
+        "icon": "Eye"
+      },
+      {
+        "name": "Component Library Design",
+        "icon": "Grid"
+      },
+      {
+        "name": "Responsive UI Design",
+        "icon": "Phone"
+      },
+      {
+        "name": "Team Management",
+        "icon": "Users"
+      },
+      {
+        "name": "Project Management",
+        "icon": "Kanban"
+      },
+      {
+        "name": "JIRA",
+        "icon": "Kanban"
+      }
+    ]
+  },
+  "featuredProjects": [
+    {
+      "title": "Looking Point – Acela Portal",
+      "description": "A robust enterprise IT lifecycle and asset management platform redesigned using modern frontend architecture with React 19, Tailwind CSS, and shadcn/ui. Delivered dynamic JSON-driven forms, markdown-based document editor, and Electron-based desktop support.",
+      "technologies": [
+        "React 19",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Electron",
+        "Redux"
+      ],
+      "role": "UI Lead Engineer",
+      "gradient": "from-orange-50 to-orange-100",
+      "borderColor": "border-orange-200",
+      "tagColors": {
+        "bg": "bg-orange-200",
+        "text": "text-orange-800"
+      }
+    },
+    {
+      "title": "TrilioVault",
+      "description": "A cloud-native data protection platform purpose-built for Kubernetes environments, featuring multi-cluster management, real-time WebSocket communication, and intuitive user interfaces for data backup and restore workflows.",
+      "technologies": ["React", "Redux", "WebSocket", "Kubernetes"],
+      "role": "Senior UI Engineer",
+      "gradient": "from-green-50 to-green-100",
+      "borderColor": "border-green-200",
+      "tagColors": {
+        "bg": "bg-green-200",
+        "text": "text-green-800"
+      }
+    },
+    {
+      "title": "Capitalmind",
+      "description": "A performance-driven mutual fund analytics platform built using Next.js and Mantine. Implemented modular component architecture, server-side rendering, and edge caching for optimal load times and SEO performance.",
+      "technologies": ["Next.js", "React", "Mantine", "SSR"],
+      "role": "UI Lead Engineer",
+      "gradient": "from-purple-50 to-purple-100",
+      "borderColor": "border-purple-200",
+      "tagColors": {
+        "bg": "bg-purple-200",
+        "text": "text-purple-800"
+      }
+    }
+  ],
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together!",
+    "email": "tushar.tibude@example.com"
+  },
+  "footer": {
+    "copyright": "© 2024 Tushar Tibude. All rights reserved."
+  }
+}
