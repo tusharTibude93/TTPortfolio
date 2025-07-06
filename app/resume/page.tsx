@@ -646,68 +646,11 @@ export default function Resume() {
             </p>
 
             {/* Download Options Section */}
-            <div className="bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-3xl p-8 mb-8 max-w-4xl mx-auto">
+            <div className="bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-3xl p-8 mb-8 max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">
                 Download Resume
               </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Visual Resume */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 p-6 rounded-2xl border border-blue-200/50">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-800">
-                      Visual Resume
-                    </h4>
-                  </div>
-                  <p className="text-slate-600 mb-4 text-sm">
-                    Beautiful, formatted resume with modern design and styling.
-                    Perfect for direct applications and interviews.
-                  </p>
-                  <button
-                    onClick={generateHTMLPDF}
-                    disabled={isGenerating}
-                    className="w-full group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-blue-400 disabled:to-purple-400 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <svg
-                          className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                        Download Visual PDF
-                      </>
-                    )}
-                  </button>
-                </div>
-
+              <div className="max-w-md mx-auto">
                 {/* ATS-Friendly Resume */}
                 <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-6 rounded-2xl border border-green-200/50">
                   <div className="flex items-center gap-3 mb-4">
@@ -784,9 +727,7 @@ export default function Resume() {
                     <p className="font-medium mb-1">💡 Pro Tip:</p>
                     <p>
                       Use the <strong>ATS-Friendly</strong> version when
-                      applying through job portals and company websites. Use the{" "}
-                      <strong>Visual</strong> version for direct applications
-                      and interviews.
+                      applying through job portals and company websites for maximum compatibility.
                     </p>
                   </div>
                 </div>
@@ -829,32 +770,6 @@ export default function Resume() {
               {/* Dropdown Menu */}
               <div className="absolute bottom-full right-0 mb-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 min-w-[200px]">
-                  <button
-                    onClick={generateHTMLPDF}
-                    disabled={isGenerating}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-slate-700 hover:bg-blue-50 rounded-xl transition-colors duration-200"
-                  >
-                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-blue-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-medium text-sm">Visual Resume</div>
-                      <div className="text-xs text-slate-500">Styled PDF</div>
-                    </div>
-                  </button>
-
                   <button
                     onClick={generateATSFriendlyResume}
                     disabled={isGenerating}
