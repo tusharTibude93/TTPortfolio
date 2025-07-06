@@ -1,0 +1,111 @@
+**Tushar Tibude**
+**Senior Software Engineer**
+📍 Nagpur, Maharashtra, India
+📧 [tush.tibude@gmail.com](mailto:tush.tibude@gmail.com) | 📞 +91 96372 33022
+🔗 [GitHub](https://github.com/tusharTibude93) | [GitLab](https://gitlab.com/tushar.tibude) | [LinkedIn](https://www.linkedin.com/in/tushar-tibude-832629a1)
+**Notice Period:** 60 days | **Availability:** Open to new opportunities
+
+---
+
+### **Professional Summary**
+
+Senior Software Engineer with 9+ years of experience architecting high-performance, scalable frontend applications using React, Next.js, and modern JavaScript tooling. Proven ability to lead frontend initiatives, design micro-frontend architectures, and develop reusable design systems. Adept at collaborating across product, design, and engineering to build user-centric, maintainable solutions. Passionate about performance tuning, clean code, and pushing the limits of frontend development.
+
+---
+
+### **Skills & Technologies**
+
+**Languages:** JavaScript, TypeScript, HTML5, CSS3, Node.js
+**Frameworks & Libraries:** React, React 19, Next.js, Redux Toolkit, TanStack Query, Tailwind CSS, shadcn/ui, Angular
+**Tooling:** Vite, Webpack, Git, GitHub Actions, Jest, Docker, Electron, Cursor AI Editor, OpenAI, Figma
+**Practices:** Microfrontend Architecture, Component Libraries, Responsive Design, Code Review, Agile/Scrum, Project Management (JIRA)
+
+---
+
+### **Key Achievements**
+
+* 🚀 Built an AI-powered web application from scratch to production in weeks using React 19, Tailwind, and TanStack Query
+* 🏆 Awarded “Superstar” at Velotio for exceptional ownership and delivery
+* 📘 Completed “Advanced React Patterns” mastering hooks, context, and performance optimization
+* 🧠 Led architecture and end-to-end UI development for multiple enterprise-scale platforms
+* 🎓 Bachelor's Degree in Computer Engineering
+
+---
+
+### **Professional Experience**
+
+#### **Looking Point – Acela Portal**
+
+**UI Lead Engineer** | *2020 – 2025*
+
+* Spearheaded frontend architecture for a large-scale IT asset management portal
+* Developed a dynamic form system based on JSON schemas
+* Created a markdown-based document editor for SOW generation
+* Migrated the platform to React 19 + shadcn/ui with full design consistency
+* Built and maintained an Electron desktop client
+* Managed a UI team, conducted sprints, PR reviews, and dependency upgrades
+  **Tech:** React 19, Tailwind CSS, Redux, shadcn/ui, Electron, Markdown Editor, ChartJS
+
+---
+
+#### **NetApp – Spot Connect**
+
+**Senior UI Engineer** | *2022 – 2024*
+
+* Owned frontend setup in a micro-frontend architecture
+* Designed reusable components and implemented rigorous unit testing
+* Handled sprint planning, task scoping, and team coordination
+* Integrated security tools like Blackduck and CodeQL in CI/CD
+  **Tech:** React, Redux, SCSS, Jest, GitHub Actions
+
+---
+
+#### **TrilioVault**
+
+**Senior UI Engineer** | *2022 – 2023*
+
+* Developed UI for Kubernetes-native backup & recovery solution
+* Implemented secure multi-cluster login and session isolation
+* Integrated WebSocket for live state updates
+* Managed complex Kubernetes API interactions directly via UI
+  **Tech:** React, Redux, SCSS, WebSocket, JWT, Highcharts
+
+---
+
+#### **Capitalmind**
+
+**UI Lead Engineer** | *2021 – 2022*
+
+* Built a mutual fund investment platform using React and Next.js
+* Translated Figma designs into responsive UI
+* Integrated SSR and edge caching for performance optimization
+* Created a custom component library using Mantine
+* Led a team with peer reviews and design alignment
+  **Tech:** React, Next.js, Redux, SCSS, Mantine, SSR
+
+---
+
+#### **PlayFi – Linux TV App**
+
+**UI Engineer** | *2024 – 2025*
+
+* Built a fullscreen Smart TV application using Electron for Linux
+* Implemented D-pad remote navigation using React hooks
+* Used `vw/vh` and Flexbox for responsive design scaling
+* Ensured seamless fullscreen rendering without zoom dependencies
+  **Tech:** Electron, React, HTML5, CSS3, Node.js
+
+---
+
+### **Education**
+
+**Bachelor’s Degree in Computer Engineering**
+\[University Name, Graduation Year — Optional]
+
+---
+
+### **Extras**
+
+* 💬 Fluent in English, Hindi, and Marathi
+* 🎯 Interested in AI-integrated UI development
+* 📈 Continually learning and exploring advanced frontend ecosystems

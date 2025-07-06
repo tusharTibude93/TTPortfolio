@@ -35,7 +35,17 @@ import {
   Bike,
   Sprout,
   Globe,
-  Heart
+  Heart,
+  Baby,
+  Fan,
+  Box,
+  Worm,
+  GraduationCap,
+  Briefcase,
+  Calendar,
+  MapPin,
+  Clock,
+  Info,
 } from "lucide-react";
 
 // Icon mapping object
@@ -74,7 +84,16 @@ const iconMap = {
   Plant: Sprout,
   Globe,
   Heart,
-  Baby: Heart
+  Baby,
+  Box,
+  Fan,
+  Worm,
+  GraduationCap,
+  Briefcase,
+  Calendar,
+  MapPin,
+  Clock,
+  Info,
 };
 
 export default function Home() {
@@ -84,14 +103,16 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold text-slate-800">
+            <div className="text-2xl font-bold text-purple-600 hover:text-purple-700 transition-colors">
               {personalData.name}
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="#about" className="text-slate-600 hover:text-blue-600 transition-colors">About</a>
+              <a href="#experience" className="text-slate-600 hover:text-blue-600 transition-colors">Experience</a>
+              <a href="#education" className="text-slate-600 hover:text-blue-600 transition-colors">Education</a>
               <a href="#skills" className="text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
               <a href="#hobbies" className="text-slate-600 hover:text-blue-600 transition-colors">Hobbies</a>
-              <a href="#projects" className="text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
+              <a href="/projects" className="text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
               <Link href="/resume" className="text-slate-600 hover:text-blue-600 transition-colors">Resume</Link>
               <a href="#contact" className="text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
             </div>
@@ -191,6 +212,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <section id="experience" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">Professional Experience</h2>
+          <div className="space-y-8">
+            {personalData.experience.map((exp, index) => (
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-shadow">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-slate-800 mb-2">{exp.position}</h3>
+                    <div className="flex items-center gap-4 text-slate-600 mb-3">
+                      <div className="flex items-center gap-2">
+                        <Briefcase className="w-5 h-5 text-blue-500" />
+                        <span className="font-semibold">{exp.company}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-slate-400" />
+                        <span>{exp.location}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-slate-500">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{exp.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        <span>{exp.employmentType}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-slate-700 leading-relaxed">{exp.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Skills Section */}
       <section id="skills" className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -280,62 +340,288 @@ export default function Home() {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-medium mb-6">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
+              Featured Work
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent mb-6 leading-tight">
+              Featured Projects
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              A selection of my most impactful projects showcasing diverse technologies and industries.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {personalData.featuredProjects.map((project, index) => (
-              <div key={index} className={`bg-gradient-to-br ${project.gradient} p-6 rounded-xl shadow-lg ${project.borderColor}`}>
-                <h3 className="text-xl font-semibold text-slate-800 mb-3">{project.title}</h3>
-                <p className="text-slate-600 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className={`${project.tagColors.bg} ${project.tagColors.text} px-2 py-1 rounded text-sm`}>
-                      {tech}
-                    </span>
-                  ))}
+              <div 
+                key={index} 
+                className="group bg-white/70 backdrop-blur-sm border border-slate-200/60 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                {/* Background accent */}
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${project.gradient.split(' ')[0]} opacity-5 rounded-full -translate-y-12 translate-x-12`}></div>
+                
+                <div className="relative">
+                  {/* Project Header */}
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-slate-800 group-hover:text-slate-900 transition-colors duration-300 mb-3">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-slate-700 leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-slate-600 mb-3 flex items-center gap-2">
+                      <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                      </svg>
+                      Technologies
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span 
+                          key={techIndex} 
+                          className={`${project.tagColors.bg} ${project.tagColors.text} px-3 py-1.5 rounded-xl text-sm font-medium border transition-all duration-200 hover:scale-105 hover:shadow-md`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Role */}
+                  <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <svg className="w-4 h-4 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="font-medium">Role:</span>
+                    <span>{project.role}</span>
+                  </div>
                 </div>
-                <p className="text-sm text-slate-500">
-                  <strong>Role:</strong> {project.role}
-                </p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          
+          <div className="text-center">
             <Link
               href="/projects"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
-              View All Projects
+              <span>View All Projects</span>
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         </div>
       </section>
 
+      {/* Education Section */}
+      <section id="education" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">Education</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-8 rounded-2xl text-white">
+              <div className="flex items-start gap-6">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="w-8 h-8 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-2">{personalData.education.degree}</h3>
+                  <p className="text-xl mb-2 opacity-90">{personalData.education.university}</p>
+                  <p className="text-lg opacity-80">Graduated: {personalData.education.graduationYear}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Extra Info Section */}
+      <section id="extra-info" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">Additional Information</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Info className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-4">Key Highlights</h3>
+                  <ul className="space-y-3">
+                    {personalData.extraInfo.map((info, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-slate-700">{info}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-slate-800 mb-8">{personalData.contact.title}</h2>
-          <p className="text-lg text-slate-600 mb-8">
-            {personalData.contact.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={`mailto:${personalData.contact.email}`}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-            >
-              Send Email
-            </a>
-            <a
-              href={personalData.social.linkedin.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-            >
-              {personalData.social.linkedin.label}
-            </a>
+      <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">{personalData.contact.title}</h2>
+            <p className="text-xl text-slate-600 mb-2">{personalData.contact.subtitle}</p>
+            <p className="text-lg text-slate-600">
+              {personalData.contact.description}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Contact Information */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6">Contact Information</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Email</p>
+                    <a href={`mailto:${personalData.contact.email}`} className="text-slate-800 hover:text-blue-600 transition-colors">
+                      {personalData.contact.email}
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Mobile</p>
+                    <a href={`tel:${personalData.contact.mobile}`} className="text-slate-800 hover:text-green-600 transition-colors">
+                      {personalData.contact.mobile}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Location</p>
+                    <p className="text-slate-800">{personalData.contact.address}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Current Role</p>
+                    <p className="text-slate-800">{personalData.contact.designation}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Professional Details */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6">Professional Details</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Availability</p>
+                    <p className="text-slate-800">{personalData.contact.availability}</p>
+                  </div>
+                </div>
+
+            
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Timezone</p>
+                    <p className="text-slate-800">{personalData.contact.timezone}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Work Mode</p>
+                    <p className="text-slate-800">{personalData.contact.workMode}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">Notice Period</p>
+                    <p className="text-slate-800">{personalData.contact.noticePeriod}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Open to Work Badge */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-2xl text-white text-center mb-8">
+            <h3 className="text-2xl font-bold mb-2">Open to Work</h3>
+            <p className="text-lg mb-4">{personalData.contact.openToWork}</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={`mailto:${personalData.contact.email}`}
+                className="bg-white text-blue-600 hover:bg-slate-100 px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Send Email
+              </a>
+              <a
+                href={personalData.social.linkedin.url}
+                target="_blank"
+                className="border border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                {personalData.social.linkedin.label}
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 {
   "name": "Tushar Tibude",
-  "title": "Software Engineer",
+  "title": "Senior Software Engineer",
+  "currentCompany": "Velotio",
   "description": "Senior front-end engineer with 9+ years of experience in scalable architecture and modern web application development.",
   "about": {
     "paragraph1": "I'm a Senior Software Engineer with over 9 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
@@ -16,14 +17,18 @@
       "label": "GitLab"
     },
     "linkedin": {
-      "url": "https://linkedin.com/in/tushar-tibude",
+      "url": "www.linkedin.com/in/tushar-tibude-832629a1",
       "label": "Connect on LinkedIn"
     }
   },
   "achievements": [
     {
       "icon": "🏆",
-      "text": "Awarded 'Superstar of the Quarter' at Velotio for exceptional project contributions"
+      "text": "Successfully developed a complete AI-integrated web application from scratch to production in just a few weeks using React 19, Tailwind CSS, shadcn/ui, and TanStack Query. Delivered highly interactive and scalable architecture."
+    },
+    {
+      "icon": "🏆",
+      "text": "Awarded 'Superstar' at Velotio for exceptional project contributions"
     },
     {
       "icon": "📚",
@@ -36,6 +41,24 @@
     {
       "icon": "🎓",
       "text": "Earned a Bachelor's Degree in Computer Engineering"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Velotio",
+      "position": "Senior Software Engineer",
+      "duration": "Sep 2017 - current",
+      "location": "Remote",
+      "description": "Worked with technologies like React, Next.js, Tailwind CSS, shadcn/ui, TanStack Query, Node.js, OpenAI, Cursor AI Editor, Git, GitHub Actions, Vite, Webpack, Jest, Docker, Electron, Figma, etc",
+      "employmentType": "Full-time"
+    },
+    {
+      "company": "GSIT, Whiz IT Services",
+      "position": "Junior Software Engineer",
+      "duration": "Sep 2015 - Sep 2017",
+      "location": "Pune, Maharashtra, India",
+      "description": "Worked with technologies like Angular 2, AngularJS, TypeScript, JavaScript, jQuery & Gulp etc",
+      "employmentType": "Full-time"
     }
   ],
   "skills": {
@@ -55,6 +78,10 @@
       {
         "name": "CSS3",
         "icon": "Palette"
+      },
+      {
+        "name": "Node.js",
+        "icon": "Server"
       }
     ],
     "frameworks": [
@@ -92,6 +119,14 @@
       }
     ],
     "tools": [
+      {
+        "name": "OpenAI",
+        "icon": "Fan"
+      },
+      {
+        "name": "Cursor AI Editor",
+        "icon": "Box"
+      },
       {
         "name": "Git",
         "icon": "GitBranch"
@@ -233,9 +268,28 @@
   "contact": {
     "title": "Get In Touch",
     "description": "I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together!",
-    "email": "tush.tibude@gmail.com"
+    "subtitle": "Ready to collaborate on your next project?",
+    "email": "tush.tibude@gmail.com",
+    "mobile": "+91 9637233022",
+    "address": "Nagpur, Maharashtra, India",
+    "designation": "Senior Software Engineer @ Velotio",
+    "openToWork": "UI Lead Engineer | Frontend Engineer",
+    "availability": "Available for new opportunities",
+    "timezone": "IST (UTC+5:30)",
+    "workMode": "Remote | Hybrid",
+    "noticePeriod": "60 days"
   },
+  "education": {
+    "degree": "Bachelor's Degree in Computer Engineering",
+    "university": "Nagpur University",
+    "graduationYear": "2015"
+  },
+  "extraInfo": [
+    "Fluent in English, Hindi, and Marathi",
+    "Interested in AI-integrated UI development",
+    "Continually learning and exploring advanced frontend ecosystems"
+  ],
   "footer": {
-    "copyright": "© 2024 Tushar Tibude. All rights reserved."
+    "copyright": "© 2025 Tushar Tibude. All rights reserved."
   }
 }

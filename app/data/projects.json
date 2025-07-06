@@ -1,20 +1,30 @@
 [
   {
     "id": 1,
-    "title": "NetApp - Spot Connect",
-    "company": "NetApp",
-    "role": "Senior UI Engineer",
-    "duration": "2023 - Present",
-    "description": "Spot Connect allows users to visually orchestrate infrastructure automation flows with a powerful editor. These flows perform logical operations and actions across tools and cloud environments.",
+    "title": "Looking Point - Acela Portal",
+    "company": "Looking Point",
+    "role": "UI Lead Engineer",
+    "duration": "2020 - 2025",
+    "description": "Acela Portal is a centralized enterprise platform for managing IT lifecycle, inventory, and assets, now rebuilt using modern UI architecture with React 19 and Tailwind CSS.",
     "responsibilities": [
-      "Led frontend architecture in a micro-frontend environment using React",
-      "Built and maintained reusable UI components with thorough unit tests",
-      "Owned sprint planning, ticket creation, and task distribution for the UI team",
-      "Conducted daily standups to monitor progress and unblock team members",
-      "Integrated Blackduck and CodeQL to automate security scanning in CI/CD"
+      "Led frontend architecture and design for enterprise IT management portal",
+      "Created dynamic UI components and forms powered by JSON schemas",
+      "Built modules for asset lifecycle tracking, support renewals, and inventory management",
+      "Developed document editor with markdown support for dynamic SOW generation",
+      "Rebuilt frontend using React 19, Tailwind CSS, and shadcn/ui for consistent design system",
+      "Built and maintained a cross-platform Electron-based desktop client",
+      "Managed the UI team, conducted sprint planning, code reviews, and dependency updates"
     ],
-    "techStack": ["React", "Redux", "SCSS", "Jest", "GitHub Actions"],
-    "color": "blue"
+    "techStack": [
+      "React 19",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Redux",
+      "ElectronJS",
+      "ChartsJS",
+      "Markdown Editor"
+    ],
+    "color": "orange"
   },
   {
     "id": 2,
@@ -52,32 +62,23 @@
     "techStack": ["NextJS", "React", "Redux", "SCSS", "Mantine", "SSR"],
     "color": "purple"
   },
+
   {
     "id": 4,
-    "title": "Looking Point - Acela Portal",
-    "company": "Looking Point",
-    "role": "UI Lead Engineer",
-    "duration": "2020 - 2025",
-    "description": "Acela Portal is a centralized enterprise platform for managing IT lifecycle, inventory, and assets, now rebuilt using modern UI architecture with React 19 and Tailwind CSS.",
+    "title": "NetApp - Spot Connect",
+    "company": "NetApp",
+    "role": "Senior UI Engineer",
+    "duration": "2022 - 2024",
+    "description": "Spot Connect allows users to visually orchestrate infrastructure automation flows with a powerful editor. These flows perform logical operations and actions across tools and cloud environments.",
     "responsibilities": [
-      "Led frontend architecture and design for enterprise IT management portal",
-      "Created dynamic UI components and forms powered by JSON schemas",
-      "Built modules for asset lifecycle tracking, support renewals, and inventory management",
-      "Developed document editor with markdown support for dynamic SOW generation",
-      "Rebuilt frontend using React 19, Tailwind CSS, and shadcn/ui for consistent design system",
-      "Built and maintained a cross-platform Electron-based desktop client",
-      "Managed the UI team, conducted sprint planning, code reviews, and dependency updates"
+      "Led frontend architecture in a micro-frontend environment using React",
+      "Built and maintained reusable UI components with thorough unit tests",
+      "Owned sprint planning, ticket creation, and task distribution for the UI team",
+      "Conducted daily standups to monitor progress and unblock team members",
+      "Integrated Blackduck and CodeQL to automate security scanning in CI/CD"
     ],
-    "techStack": [
-      "React 19",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Redux",
-      "ElectronJS",
-      "ChartsJS",
-      "Markdown Editor"
-    ],
-    "color": "orange"
+    "techStack": ["React", "Redux", "SCSS", "Jest", "GitHub Actions"],
+    "color": "blue"
   },
   {
     "id": 13,
