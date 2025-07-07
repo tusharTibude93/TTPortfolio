@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import personalData from "../data/personal.json";
 import projectsData from "../data/projects.json";
+import Header from "../components/Header";
 
 export default function Resume() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -1225,104 +1226,10 @@ export default function Resume() {
 
   // Function to print resume directly
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-slate-100/60 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link
-              href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
-            >
-              {personalInfo.name}
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link
-                href="/"
-                className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium"
-              >
-                Home
-              </Link>
-              <Link
-                href="/projects"
-                className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium"
-              >
-                Projects
-              </Link>
-              <Link
-                href="/resume"
-                className="text-blue-600 font-semibold relative"
-              >
-                Resume
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 rounded-full"></span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Header */}
-      <section className="pt-28 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            {/* Download Options Section */}
-            <div className="bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-3xl p-4 mb-0 max-w-2xl mx-auto gap-7 flex flex-row items-center justify-center">
-              <button
-                onClick={openResumeInNewTab}
-                className="w-2/3 group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                <svg
-                  className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                  />
-                </svg>
-                Download Resume
-              </button>{" "}
-              {/* ATS-Friendly Resume */}
-              <button
-                onClick={generateATSFriendlyResume}
-                disabled={isGenerating}
-                className="w-2/3 group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-green-400 disabled:to-emerald-400 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                {isGenerating ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <svg
-                      className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                    Download ATS Friendly PDF
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <Header />
       {/* Resume Content */}
-      <section className="pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Floating Download Menu */}
           <div className="fixed bottom-8 right-8 z-50">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import projectsData from "../data/projects.json";
+import Header from "../components/Header";
 
 export default function Projects() {
   const projects = projectsData;
@@ -57,27 +58,7 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-slate-200/60 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent hover:from-blue-600 hover:to-purple-600 transition-all duration-300">
-              Tushar Tibude
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/#about" className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">About</Link>
-              <Link href="/#skills" className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Skills</Link>
-              <Link href="/projects" className="text-blue-600 font-semibold relative">
-                Projects
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 rounded-full"></span>
-              </Link>
-              <Link href="/resume" className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Resume</Link>
-              <Link href="/#contact" className="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Header />
       {/* Header */}
       <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
