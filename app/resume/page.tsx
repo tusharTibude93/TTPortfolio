@@ -387,7 +387,7 @@ export default function Resume() {
             font-size: 1.25rem;
             font-weight: 600;
             color: #374151;
-            margin: 1rem 0 0.5rem 0;
+            margin: 0rem 0 0.5rem 0;
           }
 
           h4 {
@@ -398,7 +398,7 @@ export default function Resume() {
           }
 
           p {
-            margin-bottom: 1rem;
+            margin-bottom: 0rem;
             color: #4b5563;
             line-height: 1.6;
           }
@@ -570,17 +570,114 @@ export default function Resume() {
           /* Print Styles */
           @media print {
             body { 
-              background: white;
+              background: white !important;
+              color: black !important;
+              margin: 0 !important;
+              padding: 0 !important;
             }
 
             .resume-container { 
-              box-shadow: none; 
-              margin: 0; 
-              padding: 20px;
+              box-shadow: none !important;
+              margin: 0 !important;
+              padding: 20px !important;
+              border: none !important;
+              background: white !important;
+            }
+
+            #resume-content {
+              border: none !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              background: white !important;
             }
 
             .no-print {
-              display: none;
+              display: none !important;
+            }
+
+            /* Force page breaks */
+            .page-break {
+              page-break-after: always !important;
+              break-after: always !important;
+              height: 0 !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+
+            /* Prevent unwanted breaks */
+            h1, h2, h3, 
+            .group,
+            .skill-section,
+            .achievement-card {
+              page-break-inside: avoid !important;
+              break-inside: avoid !important;
+            }
+
+            // /* Border styles */
+            // .border,
+            // [class*="border"] {
+            //   border-color: #e5e5e5 !important;
+            //   border-width: 0.5pt !important;
+            //   border-style: solid !important;
+            // }
+
+            // .border-b,
+            // [class*="border-b"] {
+            //   border-bottom-color: #e5e5e5 !important;
+            //   border-bottom-width: 0.5pt !important;
+            //   border-bottom-style: solid !important;
+            // }
+
+            /* Project card specific styles */
+            .group {
+              border: 0.5pt solid #e5e5e5 !important;
+              border-left: 2pt solid #bfdbfe !important;
+              margin-bottom: 1em !important;
+              padding: 1em !important;
+              background: white !important;
+            }
+
+            /* Remove shadows and effects */
+            * {
+              box-shadow: none !important;
+              text-shadow: none !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
+
+            /* Ensure text contrast */
+            p, span, div {
+              color: black !important;
+            }
+
+            h1, h2, h3, h4 {
+              color: black !important;
+            }
+
+            /* Background colors */
+            [class*="bg-gradient-"],
+            [class*="bg-slate-"],
+            [class*="bg-blue-"],
+            [class*="bg-white"] {
+              background: white !important;
+            }
+
+            /* Adjust spacing */
+            .mb-10 {
+              margin-bottom: 1em !important;
+            }
+
+            .gap-4 {
+              gap: 0.5em !important;
+            }
+
+            /* Ensure SVG icons print */
+            svg {
+              fill: currentColor !important;
+              stroke: currentColor !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
             }
           }
 
@@ -930,7 +1027,6 @@ export default function Resume() {
             margin-right: 0.5rem;
           }
 
-          /* Project card icons */
           .project-card svg {
             width: 1.25rem;
             height: 1.25rem;
@@ -1131,7 +1227,7 @@ export default function Resume() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-slate-200/60 shadow-sm">
+      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-slate-100/60 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link
@@ -1318,14 +1414,14 @@ export default function Resume() {
           {showPreview && (
             <div
               id="resume-content"
-              className="bg-white/70 backdrop-blur-sm border border-slate-200/60 p-8 rounded-3xl shadow-lg relative overflow-hidden"
+              className="bg-white/70 backdrop-blur-sm border border-slate-100/60 p-8 rounded-3xl shadow-lg relative overflow-hidden"
             >
               {/* Background accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-600/5 opacity-5 rounded-full -translate-y-16 translate-x-16"></div>
 
               <div className="relative">
                 {/* Header */}
-                <div className="border-b border-slate-200/60 pb-8 mb-4">
+                <div className="border-b border-slate-100/60 pb-8 mb-4">
                   <div className="flex flex-row lg:flex-row gap-8">
                     {/* Photo on the left */}
                     <div className="flex justify-center lg:justify-start lg:w-1/3">
@@ -1528,7 +1624,7 @@ export default function Resume() {
 
                 {/* Professional Summary */}
                 <div className="mb-10">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3 border-b border-slate-200/60 pb-3">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3 border-b border-slate-100/60 pb-3">
                     <svg
                       className="w-6 h-6 text-blue-500"
                       fill="currentColor"
@@ -1550,7 +1646,7 @@ export default function Resume() {
 
                 {/* Skills */}
                 <div className="mb-5">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b border-slate-200/60 pb-3">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b border-slate-100/60 pb-3">
                     <svg
                       className="w-6 h-6 text-green-500"
                       fill="currentColor"
@@ -1643,10 +1739,10 @@ export default function Resume() {
                     </div>
                   </div>
                 </div>
-
+                <div className="page-break"></div>
                 {/* Achievements */}
                 <div className="mb-10">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-start gap-3 border-b border-slate-200/60 pb-3">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-start gap-3 border-b border-slate-100/60 pb-3">
                     <svg
                       className="w-6 h-6 text-yellow-500"
                       fill="currentColor"
@@ -1690,7 +1786,7 @@ export default function Resume() {
                     {projects.slice(0, 5).map((project, index) => (
                       <div
                         key={index}
-                        className="group bg-gradient-to-br from-slate-50 to-blue-50/30 border-l-4 border-blue-500 pl-6 p-3 rounded-2xl hover:shadow-lg transition-all duration-300"
+                        className="group bg-gradient-to-br from-slate-50 to-blue-50/30 border border-slate-100 border-l-4 border-l-blue-200 pl-6 p-3 rounded-2xl hover:shadow-lg transition-all duration-300 print:border-slate-200/60 print:!border-l-blue-300"
                       >
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                           <h3 className="text-xl font-bold text-slate-800 group-hover:text-slate-900 transition-colors duration-300">
