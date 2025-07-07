@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
+import FloatingDownloadButton from "./components/FloatingDownloadButton";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -94,6 +95,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
+        <FloatingDownloadButton />
       </body>
     </html>
   );
