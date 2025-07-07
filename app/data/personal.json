@@ -23,8 +23,8 @@
   },
   "achievements": [
     {
-      "icon": "🏆",
-      "text": "Successfully developed a complete AI-integrated web application from scratch to production in just a few weeks using React 19, Tailwind CSS, shadcn/ui, and TanStack Query. Delivered highly interactive and scalable architecture."
+      "icon": "🚀",
+      "text": "Successfully developed a complete AI-integrated web application from scratch to production in just a few weeks using Cursor AI Editor, React 19, Tailwind CSS, shadcn/ui, and TanStack Query. Delivered highly interactive and scalable architecture."
     },
     {
       "icon": "🏆",
@@ -275,6 +275,7 @@
     "designation": "Senior Software Engineer @ Velotio",
     "openToWork": "UI Lead Engineer | Frontend Engineer",
     "availability": "Available for new opportunities",
+    "yoe": "9+ years of experience",
     "timezone": "IST (UTC+5:30)",
     "workMode": "Remote | Hybrid",
     "noticePeriod": "60 days"

@@ -138,291 +138,832 @@ export default function Resume() {
     document.head.appendChild(style);
   };
 
-  const generateHTMLPDF = async () => {
-    setIsGenerating(true);
-    try {
-      // Create a simplified version for PDF generation
-      const pdfElement = createPDFVersion();
-      if (!pdfElement) {
-        alert("Could not find resume content");
-        return;
-      }
-
-      // Temporarily add the PDF element to the DOM
-      pdfElement.style.position = "absolute";
-      pdfElement.style.left = "-9999px";
-      pdfElement.style.top = "0";
-      pdfElement.style.width = "800px";
-      pdfElement.style.backgroundColor = "#ffffff";
-      document.body.appendChild(pdfElement);
-
-      // Wait a bit for the element to render
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      const canvas = await html2canvas(pdfElement, {
-        scale: 3,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: "#ffffff",
-        logging: false,
-        removeContainer: true,
-        width: 800,
-        height: pdfElement.scrollHeight,
-        imageTimeout: 0,
-      });
-
-      // Remove the temporary element
-      document.body.removeChild(pdfElement);
-
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210;
-      const pageHeight = 295;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-
-      let position = 0;
-
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-
-      pdf.save(`${personalInfo.name.replace(/\s+/g, "_")}_Resume.pdf`);
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      alert("Error generating PDF. Please try again.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  // Simple text-based PDF generation as fallback
-  const generateSimplePDF = () => {
-    setIsGenerating(true);
-    try {
-      const pdf = new jsPDF("p", "mm", "a4");
-      let yPos = 20;
-      const margin = 20;
-      const pageWidth = 210 - 2 * margin;
-
-      // Helper function to add text with word wrapping
-      const addWrappedText = (
-        text: string,
-        fontSize: number,
-        isBold: boolean = false
-      ) => {
-        pdf.setFontSize(fontSize);
-        if (isBold) pdf.setFont("helvetica", "bold");
-        else pdf.setFont("helvetica", "normal");
-
-        const lines = pdf.splitTextToSize(text, pageWidth);
-        if (yPos + lines.length * fontSize * 0.4 > 280) {
-          pdf.addPage();
-          yPos = 20;
-        }
-
-        pdf.text(lines, margin, yPos);
-        yPos += lines.length * fontSize * 0.4 + 5;
-      };
-
-      // Header
-      addWrappedText(personalInfo.name, 24, true);
-      addWrappedText(personalInfo.title, 16);
-      addWrappedText(`Email: ${personalInfo.contact.email}`, 10);
-      addWrappedText(`GitHub: ${personalInfo.social.github.url}`, 10);
-      addWrappedText(`LinkedIn: ${personalInfo.social.linkedin.url}`, 10);
-      yPos += 10;
-
-      // Professional Summary
-      addWrappedText("Professional Summary", 14, true);
-      addWrappedText(personalInfo.about.paragraph1, 10);
-      addWrappedText(personalInfo.about.paragraph2, 10);
-      yPos += 5;
-
-      // Skills
-      addWrappedText("Skills", 14, true);
-      addWrappedText(
-        `Languages: ${getSkillNames(personalInfo.skills.languages)}`,
-        10
-      );
-      addWrappedText(
-        `Frameworks: ${getSkillNames(personalInfo.skills.frameworks)}`,
-        10
-      );
-      addWrappedText(`Tools: ${getSkillNames(personalInfo.skills.tools)}`, 10);
-      addWrappedText(
-        `Other Skills: ${getSkillNames(personalInfo.skills.other)}`,
-        10
-      );
-      yPos += 5;
-
-      // Achievements
-      addWrappedText("Achievements", 14, true);
-      personalInfo.achievements.forEach((achievement) => {
-        addWrappedText(`• ${achievement.text}`, 10);
-      });
-      yPos += 5;
-
-      // Projects
-      addWrappedText("Project Experience", 14, true);
-      projects.slice(0, 5).forEach((project) => {
-        addWrappedText(project.title, 12, true);
-        addWrappedText(
-          `${project.company} | ${project.role} | ${project.duration}`,
-          9
-        );
-        addWrappedText(project.description, 10);
-        addWrappedText(`Tech Stack: ${project.techStack.join(", ")}`, 9);
-        yPos += 5;
-      });
-
-      pdf.save(`${personalInfo.name.replace(" ", "_")}_Resume_Simple.pdf`);
-    } catch (error) {
-      console.error("Error generating simple PDF:", error);
-      alert("Error generating PDF. Please try again.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  // Function to create a simplified PDF version of the resume
-  const createPDFVersion = () => {
-    const element = document.getElementById("resume-content");
-    if (!element) return null;
-
-    // Clone the element to avoid modifying the original
-    const clone = element.cloneNode(true) as HTMLElement;
-
-    // Apply basic styling that works with PDF generation
-    clone.style.cssText = `
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-      font-size: 14px !important;
-      line-height: 1.6 !important;
-      color: #1f2937 !important;
-      background-color: #ffffff !important;
-      padding: 30px !important;
-      max-width: 800px !important;
-      margin: 0 auto !important;
-      border: none !important;
-      box-shadow: none !important;
-    `;
-
-    // Remove any problematic classes and apply basic colors
-    const allElements = clone.querySelectorAll("*");
-    allElements.forEach((el) => {
-      try {
-        const element = el as HTMLElement;
-
-        // Remove all Tailwind classes - ensure className is a string
-        if (element.className && typeof element.className === "string") {
-          element.className = element.className.replace(
-            /text-\w+-\d+|bg-\w+-\d+|border-\w+-\d+/g,
-            ""
-          );
-        }
-
-        // Apply professional styling for PDF
-        if (element.tagName === "H1") {
-          element.style.cssText =
-            "font-size: 32px !important; font-weight: 700 !important; color: #1f2937 !important; margin-bottom: 8px !important; text-align: center !important; letter-spacing: -0.5px !important;";
-        } else if (element.tagName === "H2") {
-          element.style.cssText =
-            "font-size: 20px !important; font-weight: 600 !important; color: #1f2937 !important; margin: 20px 0 12px 0 !important; border-bottom: 2px solid #3b82f6 !important; padding-bottom: 6px !important;";
-        } else if (element.tagName === "H3") {
-          element.style.cssText =
-            "font-size: 16px !important; font-weight: 600 !important; color: #374151 !important; margin: 12px 0 6px 0 !important;";
-        } else if (element.tagName === "H4") {
-          element.style.cssText =
-            "font-size: 14px !important; font-weight: 600 !important; color: #4b5563 !important; margin: 8px 0 4px 0 !important;";
-        } else if (element.tagName === "P") {
-          element.style.cssText =
-            "color: #4b5563 !important; margin-bottom: 8px !important; line-height: 1.6 !important;";
-        } else if (element.tagName === "A") {
-          element.style.cssText =
-            "color: #3b82f6 !important; text-decoration: none !important; font-weight: 500 !important;";
-        } else if (element.tagName === "LI") {
-          element.style.cssText =
-            "color: #4b5563 !important; margin-bottom: 4px !important; line-height: 1.5 !important;";
-        } else if (element.tagName === "DIV") {
-          element.style.cssText =
-            "color: #4b5563 !important; margin-bottom: 8px !important;";
-        } else if (element.tagName === "SPAN") {
-          element.style.cssText = "color: #4b5563 !important;";
-        } else if (element.tagName === "UL") {
-          element.style.cssText =
-            "margin: 8px 0 !important; padding-left: 20px !important;";
-        } else if (element.tagName === "OL") {
-          element.style.cssText =
-            "margin: 8px 0 !important; padding-left: 20px !important;";
-        }
-
-        // Special handling for specific sections
-        if (element.className && typeof element.className === "string") {
-          // Handle skill sections
-          if (element.className.includes("bg-gradient-to-br")) {
-            element.style.cssText += `
-              background: #f8fafc !important;
-              border: 1px solid #e2e8f0 !important;
-              border-radius: 8px !important;
-              padding: 12px !important;
-              margin: 8px 0 !important;
-            `;
-          }
-
-          // Handle achievement items
-          if (element.className.includes("from-yellow-50")) {
-            element.style.cssText += `
-              background: #fefce8 !important;
-              border: 1px solid #fde047 !important;
-              border-radius: 8px !important;
-              padding: 12px !important;
-              margin: 8px 0 !important;
-            `;
-          }
-
-          // Handle project cards
-          if (element.className.includes("from-slate-50")) {
-            element.style.cssText += `
-              background: #f8fafc !important;
-              border-left: 4px solid #3b82f6 !important;
-              border-radius: 8px !important;
-              padding: 16px !important;
-              margin: 12px 0 !important;
-            `;
-          }
-
-          // Handle tech stack tags
-          if (element.className.includes("bg-blue-100")) {
-            element.style.cssText += `
-              background: #dbeafe !important;
-              color: #1d4ed8 !important;
-              border: 1px solid #93c5fd !important;
-              border-radius: 6px !important;
-              padding: 4px 8px !important;
-              margin: 2px !important;
-              display: inline-block !important;
-              font-size: 12px !important;
-            `;
-          }
-        }
-      } catch (error) {
-        console.warn("Error processing element for PDF:", error);
-        // Continue with other elements
-      }
-    });
-
-    return clone;
-  };
-
   // Helper function to get skill names
   const getSkillNames = (skills: any[]) =>
     skills.map((skill) => skill.name).join(", ");
+
+  // Function to open resume in new tab
+  const openResumeInNewTab = () => {
+    const resumeContent = document.getElementById("resume-content");
+    if (!resumeContent) {
+      alert("Could not find resume content");
+      return;
+    }
+
+    // Create a new window with just the resume content
+    const newWindow = window.open(
+      "",
+      "_blank",
+      "width=1200,height=800,scrollbars=yes"
+    );
+    if (!newWindow) {
+      alert("Please allow popups to open resume in new tab");
+      return;
+    }
+
+    // Clone the resume content
+    const clonedContent = resumeContent.cloneNode(true) as HTMLElement;
+
+    // Write the HTML to the new window with comprehensive CSS
+    newWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${personalInfo.name} - Resume</title>
+        <style>
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+          
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            line-height: 1.6;
+            color: #1f2937;
+          }
+          
+          .resume-container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 40px;
+          }
+          
+          /* Grid and Flexbox Layouts */
+          .grid {
+            display: grid;
+            gap: 2rem;
+          }
+
+          .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+          }
+
+          @media (min-width: 768px) {
+            .md\\:grid-cols-2 {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+
+          .flex {
+            display: flex;
+          }
+
+          .flex-col {
+            flex-direction: column;
+          }
+
+          .flex-row {
+            flex-direction: row;
+          }
+
+          .flex-wrap {
+            flex-wrap: wrap;
+          }
+
+          /* Flex Alignment */
+          .items-start {
+            align-items: flex-start;
+          }
+
+          .items-center {
+            align-items: center;
+          }
+
+          .items-end {
+            align-items: flex-end;
+          }
+
+          .justify-start {
+            justify-content: flex-start;
+          }
+
+          .justify-center {
+            justify-content: center;
+          }
+
+          .justify-end {
+            justify-content: flex-end;
+          }
+
+          .justify-between {
+            justify-content: space-between;
+          }
+
+          /* Spacing Adjustments */
+          .p-3 {
+            padding: 0.75rem;
+          }
+
+          .px-0 {
+            padding-left: 0;
+            padding-right: 0;
+          }
+
+          .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+          }
+
+          .my-0 {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          /* Update header section */
+          h2.flex {
+            display: flex;
+          }
+
+          h2.items-start {
+            align-items: flex-start;
+          }
+
+          h2.items-center {
+            align-items: center;
+          }
+
+          /* Specific section adjustments */
+          .achievement-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+          }
+
+          .achievement-header svg {
+            margin-top: 0.25rem;
+          }
+
+          /* Grid gap adjustments */
+          .gap-2 {
+            gap: 0.5rem;
+          }
+                      .gap-4 {
+            gap: 1rem;
+          }
+
+          .gap-8 {
+            gap: 2rem;
+          }
+
+          /* Margin adjustments */
+          .mb-5 {
+            margin-bottom: 1.25rem;
+          }
+
+          .mt-1 {
+            margin-top: 0.25rem;
+          }
+
+          /* Icon size adjustments */
+          .w-2 {
+            width: 0.5rem !important;
+          }
+
+          .h-2 {
+            height: 0.5rem !important;
+          }
+
+          svg.w-2, svg.h-2 {
+            width: 0.5rem !important;
+            height: 0.5rem !important;
+          }
+
+          /* Spacing */
+          .mb-1 { margin-bottom: 0.25rem; }
+          .mb-2 { margin-bottom: 0.5rem; }
+          .mb-3 { margin-bottom: 0.75rem; }
+          .mb-4 { margin-bottom: 1rem; }
+          .mb-6 { margin-bottom: 1.5rem; }
+          .mb-8 { margin-bottom: 2rem; }
+          .mb-10 { margin-bottom: 2.5rem; }
+
+          .mt-1 { margin-top: 0.25rem; }
+          .mt-2 { margin-top: 0.5rem; }
+          .mt-4 { margin-top: 1rem; }
+
+          .p-2 { padding: 0.5rem; }
+          .p-3 { padding: 0.75rem; }
+          .p-4 { padding: 1rem; }
+          .p-6 { padding: 1.5rem; }
+          .p-8 { padding: 2rem; }
+
+          .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+          .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+          .px-4 { padding-left: 1rem; padding-right: 1rem; }
+
+          .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+          .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+          .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+
+          /* Typography */
+          h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+          }
+
+          h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 1.25rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b82f6;
+          }
+
+          h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 1rem 0 0.5rem 0;
+          }
+
+          h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin: 0.75rem 0 0.5rem 0;
+          }
+
+          p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+            line-height: 1.6;
+          }
+
+          /* Links */
+          a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+          }
+
+          a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+          }
+
+          /* Lists */
+          ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+          }
+
+          li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+          }
+
+          /* Cards and Sections */
+          .card {
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            transition: all 0.3s;
+          }
+
+          .card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+          }
+
+          /* Project Cards */
+          .project-card {
+            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+          }
+
+          /* Tech Stack Tags */
+          .tech-tag {
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem;
+          }
+
+          /* Achievement Cards */
+          .achievement-card {
+            background: linear-gradient(to right, #fefce8, #fef9c3);
+            border: 1px solid #fde047;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;  /* Reduced gap */
+          }
+
+          .achievement-card span:first-child {
+            font-size: 1.5rem;
+            line-height: 1;
+            flex-shrink: 0;
+            flex-basis: auto;  /* Let content determine width */
+            margin-top: 0.25rem;
+          }
+
+          .achievement-card span:last-child {
+            flex: 1;
+            text-align: left;
+            color: #374151;
+            line-height: 1.5;
+            min-width: 0;  /* Allow text to wrap */
+          }
+
+          /* Achievement grid */
+          .grid.gap-4 {
+            display: grid;
+            gap: 1rem;
+          }
+
+          /* Achievement items alignment */
+          .flex.items-start {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;  /* Reduced gap */
+          }
+
+          .flex.items-start > svg {
+            flex-shrink: 0;
+            flex-basis: auto;  /* Let content determine width */
+            margin-top: 0.25rem;
+            width: 1.5rem;  /* Fixed width */
+            height: 1.5rem;  /* Fixed height */
+          }
+
+          .flex.items-start > span {
+            flex: 1;
+            text-align: left;
+            min-width: 0;  /* Allow text to wrap */
+          }
+
+          /* Achievement text styles */
+          .text-slate-700.leading-relaxed {
+            text-align: left;
+            line-height: 1.6;
+            margin-left: 0;  /* Remove any left margin */
+          }
+
+          /* Achievement section header */
+          h2.flex.items-start {
+            gap: 0.5rem;  /* Reduced gap */
+          }
+
+          h2.flex.items-start > svg {
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+          }
+
+          /* Skill Sections */
+          .skill-section {
+            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+          }
+
+          /* Responsive Design */
+          @media (max-width: 768px) {
+            .resume-container {
+              margin: 10px;
+              padding: 20px;
+            }
+
+            h1 {
+              font-size: 1.875rem;
+            }
+
+            h2 {
+              font-size: 1.25rem;
+            }
+
+            .flex-col-mobile {
+              flex-direction: column;
+            }
+
+            .grid-cols-1-mobile {
+              grid-template-columns: 1fr;
+            }
+          }
+
+          /* Print Styles */
+          @media print {
+            body { 
+              background: white;
+            }
+
+            .resume-container { 
+              box-shadow: none; 
+              margin: 0; 
+              padding: 20px;
+            }
+
+            .no-print {
+              display: none;
+            }
+          }
+
+          /* Utility Classes */
+          .text-center { text-align: center; }
+          .font-bold { font-weight: 700; }
+          .font-semibold { font-weight: 600; }
+          .text-sm { font-size: 0.875rem; }
+          .text-lg { font-size: 1.125rem; }
+          .text-xl { font-size: 1.25rem; }
+          .text-2xl { font-size: 1.5rem; }
+          .text-3xl { font-size: 1.875rem; }
+          .text-4xl { font-size: 2.25rem; }
+          
+          .text-slate-600 { color: #475569; }
+          .text-slate-700 { color: #334155; }
+          .text-slate-800 { color: #1e293b; }
+          
+          .bg-white { background-color: #ffffff; }
+          .bg-slate-50 { background-color: #f8fafc; }
+          .bg-blue-50 { background-color: #eff6ff; }
+          
+          .rounded-full { border-radius: 9999px; }
+          .rounded-lg { border-radius: 0.5rem; }
+          .rounded-xl { border-radius: 0.75rem; }
+          .rounded-2xl { border-radius: 1rem; }
+          
+          .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+          .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+          .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+
+          /* Custom Components */
+          .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          }
+
+          .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+          }
+
+          .status-badge.available {
+            background-color: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+          }
+
+          .status-badge.notice {
+            background-color: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+          }
+
+          /* Icons */
+          .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+          .icon-sm {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          .icon-lg {
+            width: 2rem;
+            height: 2rem;
+          }
+
+          /* SVG Icons */
+          svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+          /* Icon sizes based on Tailwind classes */
+          svg.w-4, svg[class*="w-4"] {
+            width: 1rem !important;
+            height: 1rem !important;
+          }
+
+          svg.w-5, svg[class*="w-5"] {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
+
+          svg.w-6, svg[class*="w-6"] {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+          }
+
+          svg.w-8, svg[class*="w-8"] {
+            width: 2rem !important;
+            height: 2rem !important;
+          }
+
+          svg.w-10, svg[class*="w-10"] {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+          }
+
+          /* Icon containers */
+          div[class*="w-10"], div[class*="w-8"], div[class*="w-6"], div[class*="w-5"], div[class*="w-4"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          /* Social icons */
+          a svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Section header icons */
+          h2 svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.75rem;
+          }
+
+          /* List item icons */
+          li svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Status badge icons */
+          .status-badge svg {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          /* Achievement icons */
+          .achievement-card svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Project card icons */
+          .project-card svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Skill section icons */
+          .skill-section svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Fix icon alignment */
+          .inline-flex svg {
+            flex-shrink: 0;
+          }
+
+          /* Icon colors */
+          svg.text-blue-500 { color: #3b82f6; }
+          svg.text-green-500 { color: #22c55e; }
+          svg.text-yellow-500 { color: #eab308; }
+          svg.text-red-500 { color: #ef4444; }
+          svg.text-indigo-500 { color: #6366f1; }
+          svg.text-purple-500 { color: #a855f7; }
+          svg.text-slate-500 { color: #64748b; }
+          svg.text-slate-600 { color: #475569; }
+          svg.text-white { color: #ffffff; }
+
+          /* Icon colors - ensure they print */
+          svg.text-blue-500, 
+          svg[class*="text-blue-500"] { 
+            color: #3b82f6 !important; 
+            fill: #3b82f6 !important; 
+          }
+          
+          svg.text-green-500,
+          svg[class*="text-green-500"] { 
+            color: #22c55e !important; 
+            fill: #22c55e !important; 
+          }
+          
+          svg.text-yellow-500,
+          svg[class*="text-yellow-500"] { 
+            color: #eab308 !important; 
+            fill: #eab308 !important; 
+          }
+          
+          svg.text-red-500,
+          svg[class*="text-red-500"] { 
+            color: #ef4444 !important; 
+            fill: #ef4444 !important; 
+          }
+          
+          svg.text-indigo-500,
+          svg[class*="text-indigo-500"] { 
+            color: #6366f1 !important; 
+            fill: #6366f1 !important; 
+          }
+          
+          svg.text-purple-500,
+          svg[class*="text-purple-500"] { 
+            color: #a855f7 !important; 
+            fill: #a855f7 !important; 
+          }
+          
+          svg.text-slate-500,
+          svg[class*="text-slate-500"] { 
+            color: #64748b !important; 
+            fill: #64748b !important; 
+          }
+          
+          svg.text-slate-600,
+          svg[class*="text-slate-600"] { 
+            color: #475569 !important; 
+            fill: #475569 !important; 
+          }
+          
+          svg.text-white,
+          svg[class*="text-white"] { 
+            color: #ffffff !important; 
+            fill: #ffffff !important; 
+          }
+
+          /* Ensure SVG colors print correctly */
+          @media print {
+            svg[class*="text-"] {
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
+
+            /* Force white background behind white icons for contrast */
+            svg.text-white,
+            svg[class*="text-white"] {
+              background-color: transparent !important;
+            }
+
+            /* Ensure icon containers preserve background colors */
+            .bg-blue-500, .bg-green-500, .bg-purple-500, .bg-yellow-500,
+            .bg-red-500, .bg-indigo-500, .bg-slate-500, .bg-slate-600 {
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
+          }
+
+          .icon-sm {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          .icon-lg {
+            width: 2rem;
+            height: 2rem;
+          }
+
+          /* Icon containers */
+          div[class*="w-10"], 
+          div[class*="w-8"], 
+          div[class*="w-6"], 
+          div[class*="w-5"], 
+          div[class*="w-4"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          /* Icon sizes based on Tailwind classes */
+          svg.w-4, 
+          svg[class*="w-4"] {
+            width: 1rem !important;
+            height: 1rem !important;
+          }
+
+          svg.w-5, 
+          svg[class*="w-5"] {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
+
+          svg.w-6, 
+          svg[class*="w-6"] {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+          }
+
+          svg.w-8, 
+          svg[class*="w-8"] {
+            width: 2rem !important;
+            height: 2rem !important;
+          }
+
+          svg.w-10, 
+          svg[class*="w-10"] {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+          }
+
+          /* Social icons */
+          a svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Section header icons */
+          h2 svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.75rem;
+          }
+
+          /* List item icons */
+          li svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Status badge icons */
+          .status-badge svg {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          /* Achievement icons */
+          .achievement-card svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Project card icons */
+          .project-card svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Skill section icons */
+          .skill-section svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+          }
+
+          /* Fix icon alignment */
+          .inline-flex svg {
+            flex-shrink: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="resume-container">
+          ${clonedContent.outerHTML}
+        </div>
+      </body>
+      </html>
+    `);
+    newWindow.document.close();
+    // Wait for content to load then print
+    newWindow.onload = () => {
+      newWindow.focus(); // Focus the window
+      newWindow.print(); // Open print dialog
+    };
+  };
 
   // Function to generate ATS-friendly resume
   const generateATSFriendlyResume = () => {
@@ -586,6 +1127,7 @@ export default function Resume() {
     }
   };
 
+  // Function to print resume directly
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       {/* Navigation */}
@@ -624,114 +1166,60 @@ export default function Resume() {
       </nav>
 
       {/* Header */}
-      <section className="pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="pt-28 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-medium mb-6">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 000 2h6a1 1 0 100-2H7z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Professional Resume
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent mb-6 leading-tight">
-              Resume
-            </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8">
-              A comprehensive overview of my professional experience, skills,
-              and achievements.
-            </p>
-
             {/* Download Options Section */}
-            <div className="bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-3xl p-8 mb-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">
+            <div className="bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-3xl p-4 mb-0 max-w-2xl mx-auto gap-7 flex flex-row items-center justify-center">
+              <button
+                onClick={openResumeInNewTab}
+                className="w-2/3 group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
+              >
+                <svg
+                  className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+                  />
+                </svg>
                 Download Resume
-              </h3>
-              <div className="max-w-md mx-auto">
-                {/* ATS-Friendly Resume */}
-                <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-6 rounded-2xl border border-green-200/50">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                        />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-800">
-                      ATS-Friendly Resume
-                    </h4>
-                  </div>
-                  <p className="text-slate-600 mb-4 text-sm">
-                    Clean, simple format optimized for Applicant Tracking
-                    Systems. Ensures maximum compatibility with job portals.
-                  </p>
-                  <button
-                    onClick={generateATSFriendlyResume}
-                    disabled={isGenerating}
-                    className="w-full group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-green-400 disabled:to-emerald-400 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <svg
-                          className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                        Download ATS PDF
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Info Section */}
-              <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-                <div className="flex items-start gap-3">
-                  <svg
-                    className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div className="text-sm text-amber-800">
-                    <p className="font-medium mb-1">💡 Pro Tip:</p>
-                    <p>
-                      Use the <strong>ATS-Friendly</strong> version when
-                      applying through job portals and company websites for maximum compatibility.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </button>{" "}
+              {/* ATS-Friendly Resume */}
+              <button
+                onClick={generateATSFriendlyResume}
+                disabled={isGenerating}
+                className="w-2/3 group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-green-400 disabled:to-emerald-400 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
+              >
+                {isGenerating ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="w-4 h-4 group-hover:scale-110 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    Download ATS Friendly PDF
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -797,6 +1285,31 @@ export default function Resume() {
                       </div>
                     </div>
                   </button>
+
+                  <button
+                    onClick={openResumeInNewTab}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-slate-700 hover:bg-blue-50 rounded-xl transition-colors duration-200"
+                  >
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <svg
+                        className="w-4 h-4 text-blue-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="font-medium text-sm">Open in New Tab</div>
+                      <div className="text-xs text-slate-500">Clean view</div>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -812,44 +1325,38 @@ export default function Resume() {
 
               <div className="relative">
                 {/* Header */}
-                <div className="border-b border-slate-200/60 pb-8 mb-8">
-                  <div className="flex flex-col md:flex-row md:items-start gap-8">
-                    <div className="flex justify-center md:justify-start">
+                <div className="border-b border-slate-200/60 pb-8 mb-4">
+                  <div className="flex flex-row lg:flex-row gap-8">
+                    {/* Photo on the left */}
+                    <div className="flex justify-center lg:justify-start lg:w-1/3">
                       <div className="relative">
                         <Image
                           src="/tushar.png"
                           alt={personalInfo.name}
-                          width={140}
-                          height={140}
+                          width={180}
+                          height={180}
                           className="rounded-full border-4 border-white shadow-xl"
                           priority
                         />
-                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white flex items-center justify-center">
-                          <svg
-                            className="w-4 h-4 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
                       </div>
                     </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <h1 className="text-4xl font-bold text-slate-800 mb-3">
-                        {personalInfo.name}
-                      </h1>
-                      <p className="text-2xl text-slate-600 mb-6">
-                        {personalInfo.title}
-                      </p>
-                      <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
+
+                    {/* Content on the right */}
+                    <div className="flex-1 lg:w-2/3">
+                      <div className="text-center lg:text-left">
+                        <h1 className="text-4xl font-bold text-slate-800 mb-3">
+                          {personalInfo.name}
+                        </h1>
+                        <p className="text-2xl text-slate-600 mb-6">
+                          {personalInfo.title}
+                        </p>
+                      </div>
+
+                      {/* Contact Information */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-1">
                         <div className="flex items-center gap-2 text-slate-600">
                           <svg
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-blue-500 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -858,14 +1365,14 @@ export default function Resume() {
                           </svg>
                           <a
                             href={`mailto:${personalInfo.contact.email}`}
-                            className="text-blue-600 hover:underline font-medium"
+                            className="text-blue-600 hover:underline font-medium text-sm"
                           >
                             {personalInfo.contact.email}
                           </a>
                         </div>
                         <div className="flex items-center gap-2 text-slate-600">
                           <svg
-                            className="w-4 h-4 text-green-500"
+                            className="w-4 h-4 text-green-500 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -873,14 +1380,14 @@ export default function Resume() {
                           </svg>
                           <a
                             href={`tel:${personalInfo.contact.mobile}`}
-                            className="text-blue-600 hover:underline font-medium"
+                            className="text-blue-600 hover:underline font-medium text-sm"
                           >
                             {personalInfo.contact.mobile}
                           </a>
                         </div>
                         <div className="flex items-center gap-2 text-slate-600">
                           <svg
-                            className="w-4 h-4 text-purple-500"
+                            className="w-4 h-4 text-purple-500 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -890,113 +1397,131 @@ export default function Resume() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <span className="font-medium">
+                          <span className="font-medium text-sm">
                             {personalInfo.contact.address}
                           </span>
                         </div>
+                        <div className="flex items-center gap-2 text-slate-600">
+                          <svg
+                            className="w-4 h-4 text-indigo-500 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="font-medium text-sm">
+                            {personalInfo.contact.availability}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Professional Details */}
-                <div className="mb-8">
-                  <div className="flex flex-row gap-3 mb-1">
-                    <a
-                      href={personalInfo.social.github.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg
-                        className="w-4 h-4 text-slate-600"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                      GitHub
-                    </a>
-                    <a
-                      href={personalInfo.social.gitlab.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg
-                        className="w-4 h-4 text-slate-600"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z" />
-                      </svg>
-                      GitLab
-                    </a>
-                    <a
-                      href={personalInfo.social.linkedin.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg
-                        className="w-4 h-4 text-slate-600"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                      </svg>
-                      LinkedIn
-                    </a>
-                    <a
-                      href="https://tushartibude.netlify.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg
-                        className="w-4 h-4 text-slate-600"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Portfolio
-                    </a>
-                    <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 p-3 rounded-xl border border-indigo-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2 text-sm">
-                        <svg
-                          className="w-3 h-3 text-indigo-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
+                      {/* Social Links */}
+                      <div className="flex flex-wrap gap-2">
+                        <a
+                          href={personalInfo.social.github.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-1 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        {personalInfo.contact.availability}
-                      </h3>
-                    </div>
-                    <div className="bg-gradient-to-br from-red-50 to-red-100/50 p-3 rounded-xl border border-red-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2 text-sm">
-                        <svg
-                          className="w-3 h-3 text-red-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
+                          <svg
+                            className="w-4 h-4 text-slate-600"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                          </svg>
+                          GitHub
+                        </a>
+                        <a
+                          href={personalInfo.social.gitlab.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Notice Period {personalInfo.contact.noticePeriod}
-                      </h3>
+                          <svg
+                            className="w-4 h-4 text-slate-600"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z" />
+                          </svg>
+                          GitLab
+                        </a>
+                        <a
+                          href={personalInfo.social.linkedin.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                        >
+                          <svg
+                            className="w-4 h-4 text-slate-600"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                          LinkedIn
+                        </a>
+                        <a
+                          href="https://tushartibude.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                        >
+                          <svg
+                            className="w-4 h-4 text-slate-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Portfolio
+                        </a>
+                      </div>
+
+                      {/* Status Info */}
+                      <div className="flex flex-wrap gap-3">
+                      <div className="bg-gradient-to-br from-indigo-50 to-indigo-100/50 px-0 py-1 rounded-xl border border-indigo-200/50">
+                          <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2 text-sm my-0">
+                            <svg
+                              className="w-2 h-2 text-indigo-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            {personalInfo.contact.yoe}
+                          </h3>
+                        </div>
+                        <div className="bg-gradient-to-br from-red-50 to-red-100/50 px-0 py-1 rounded-xl border border-red-200/50">
+                          <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2 text-sm my-0">
+                            <svg
+                              className="w-2 h-2 text-red-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            Notice Period {personalInfo.contact.noticePeriod}
+                          </h3>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1024,7 +1549,7 @@ export default function Resume() {
                 </div>
 
                 {/* Skills */}
-                <div className="mb-10">
+                <div className="mb-5">
                   <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b border-slate-200/60 pb-3">
                     <svg
                       className="w-6 h-6 text-green-500"
@@ -1039,9 +1564,9 @@ export default function Resume() {
                     </svg>
                     Skills & Technologies
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 p-6 rounded-2xl border border-blue-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 p-3 rounded-2xl border border-blue-200/50">
+                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2">
                         <svg
                           className="w-4 h-4 text-blue-500"
                           fill="currentColor"
@@ -1059,8 +1584,8 @@ export default function Resume() {
                         {getSkillNames(personalInfo.skills.languages)}
                       </p>
                     </div>
-                    <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-6 rounded-2xl border border-green-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-green-50 to-green-100/50 p-3 rounded-2xl border border-green-200/50">
+                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2">
                         <svg
                           className="w-4 h-4 text-green-500"
                           fill="currentColor"
@@ -1078,8 +1603,8 @@ export default function Resume() {
                         {getSkillNames(personalInfo.skills.frameworks)}
                       </p>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 p-6 rounded-2xl border border-purple-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 p-3 rounded-2xl border border-purple-200/50">
+                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2">
                         <svg
                           className="w-4 h-4 text-purple-500"
                           fill="currentColor"
@@ -1097,8 +1622,8 @@ export default function Resume() {
                         {getSkillNames(personalInfo.skills.tools)}
                       </p>
                     </div>
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100/50 p-6 rounded-2xl border border-orange-200/50">
-                      <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                    <div className="bg-gradient-to-br from-orange-50 to-orange-100/50 p-3 rounded-2xl border border-orange-200/50">
+                      <h3 className="font-semibold text-slate-800 mb-1 flex items-center gap-2">
                         <svg
                           className="w-4 h-4 text-orange-500"
                           fill="currentColor"
@@ -1121,7 +1646,7 @@ export default function Resume() {
 
                 {/* Achievements */}
                 <div className="mb-10">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b border-slate-200/60 pb-3">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-start gap-3 border-b border-slate-200/60 pb-3">
                     <svg
                       className="w-6 h-6 text-yellow-500"
                       fill="currentColor"
@@ -1135,13 +1660,10 @@ export default function Resume() {
                     {personalInfo.achievements.map((achievement, index) => (
                       <div
                         key={index}
-                        className="flex items-start gap-4 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl border border-yellow-200/50"
+                        className="flex items-start gap-2 p-2 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl border border-yellow-200/50"
                       >
-                        <span className="text-2xl mt-1">
-                          {achievement.icon}
-                        </span>
-                        <span className="text-slate-700 leading-relaxed">
-                          {achievement.text}
+                        <span className="text-slate-700 leading-relaxed flex items-center gap-2">
+                          {achievement.icon} {achievement.text}
                         </span>
                       </div>
                     ))}
@@ -1168,7 +1690,7 @@ export default function Resume() {
                     {projects.slice(0, 5).map((project, index) => (
                       <div
                         key={index}
-                        className="group bg-gradient-to-br from-slate-50 to-blue-50/30 border-l-4 border-blue-500 pl-6 p-6 rounded-2xl hover:shadow-lg transition-all duration-300"
+                        className="group bg-gradient-to-br from-slate-50 to-blue-50/30 border-l-4 border-blue-500 pl-6 p-3 rounded-2xl hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                           <h3 className="text-xl font-bold text-slate-800 group-hover:text-slate-900 transition-colors duration-300">
