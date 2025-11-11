@@ -2,9 +2,9 @@
   "name": "Tushar Tibude",
   "title": "Frontend Engineer",
   "currentCompany": "Velotio",
-  "description": "Senior front-end engineer with 9+ years of experience in scalable architecture and modern web application development.",
+  "description": "Senior front-end engineer with 10+ years of experience in scalable architecture and modern web application development.",
   "about": {
-    "paragraph1": "I'm a Senior Software Engineer with over 9 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
+    "paragraph1": "I'm a Senior Software Engineer with over 10 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
     "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, and pushing the boundaries of what frontend engineering can do."
   },
   "social": {
@@ -275,7 +275,7 @@
     "designation": "Senior Software Engineer @ Velotio",
     "openToWork": "UI Lead Engineer | Frontend Engineer",
     "availability": "Available for new opportunities",
-    "yoe": "9+ years of experience",
+    "yoe": "10+ years of experience",
     "timezone": "IST (UTC+5:30)",
     "workMode": "Remote | Hybrid",
     "noticePeriod": "60 days"
