@@ -1,11 +1,34 @@
 {
   "name": "Tushar Tibude",
   "title": "Frontend Engineer",
-  "currentCompany": "Velotio",
+  "currentCompany": "R Systems International Ltd",
   "description": "Senior front-end engineer with 10+ years of experience in scalable architecture and modern web application development.",
   "about": {
-    "paragraph1": "I'm a Senior Software Engineer with over 10 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I’ve led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind.",
-    "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, and pushing the boundaries of what frontend engineering can do."
+    "paragraph1": "I'm a Senior Software Engineer with over 10 years of experience crafting high-performance web applications using React, Next.js, and modern frontend technologies. I've led UI engineering efforts, designed scalable architectures, and delivered end-to-end solutions for organizations like NetApp, TrilioVault, and Capitalmind. I'm passionate about leveraging AI tools like Claude and OpenAI to accelerate development and create innovative solutions.",
+    "paragraph2": "My core strengths lie in architecting micro-frontend systems, driving component library development, and performance best practices. I thrive in cross-functional environments, collaborate effectively with product and design teams, and take pride in building clean, maintainable, and scalable codebases. I'm deeply passionate about user-centric development, progressive enhancement, AI-driven development methodologies, and pushing the boundaries of what frontend engineering can do.",
+    "highlightsTitle": "Career Snapshot",
+    "highlights": [
+      {
+        "label": "Delivery",
+        "value": "90%+",
+        "description": "Consistently met sprint commitments and shipped large product areas end-to-end."
+      },
+      {
+        "label": "Ownership",
+        "value": "15+ projects",
+        "description": "15+ projects delivered with 100+ core modules across PMO, inventory, quoting, and client experience flows."
+      },
+      {
+        "label": "Engineering quality",
+        "value": "Business Builder",
+        "description": "Focused on performance, resilient integrations, testing strategy, and scalable architecture."
+      },
+      {
+        "label": "Leadership",
+        "value": "Client + Team",
+        "description": "Led demos, mentored peers, codified migration guides, and improved team engineering standards."
+      }
+    ]
   },
   "social": {
     "github": {
@@ -28,15 +51,23 @@
     },
     {
       "icon": "🏆",
-      "text": "Awarded 'Superstar' at Velotio for exceptional project contributions"
+      "text": "Awarded 'Superstar' at R Systems International Ltd for exceptional project contributions and technical leadership"
+    },
+    {
+      "icon": "💡",
+      "text": "Pioneered AI-assisted development workflow using Claude and Cursor AI, significantly improving development velocity and code quality"
     },
     {
       "icon": "📚",
       "text": "Completed 'Advanced React Patterns' – mastering hooks, context, and performance optimizations"
     },
     {
-      "icon": "🛠️",
-      "text": "Led architecture setup and end-to-end development of web applications using React"
+      "icon": "🎯",
+      "text": "Built and designed personal portfolio website showcasing modern Next.js practices with React 19, Tailwind CSS, and shadcn/ui components"
+    },
+    {
+      "icon": "📊",
+      "text": "Maintained ~95% sprint completion rate with transformational impact—architected, built, and shipped 10+ core modules end-to-end across platform suites"
     },
     {
       "icon": "🎓",
@@ -45,11 +76,11 @@
   ],
   "experience": [
     {
-      "company": "Velotio",
+      "company": "R Systems International Ltd (formerly Velotio)",
       "position": "Senior Software Engineer",
       "duration": "Sep 2017 - current",
       "location": "Remote",
-      "description": "Worked with technologies like React, Next.js, Tailwind CSS, shadcn/ui, TanStack Query, Node.js, OpenAI, Cursor AI Editor, Git, GitHub Actions, Vite, Webpack, Jest, Docker, Electron, Figma, etc",
+      "description": "Worked with technologies like React, Next.js, TypeScript, Tailwind CSS, shadcn/ui, TanStack Query, Node.js, OpenAI, Claude AI, Cursor AI Editor, Git, GitHub Actions, Vite, Webpack, Jest, Docker, Electron, Figma, etc",
       "employmentType": "Full-time"
     },
     {
@@ -126,6 +157,10 @@
       {
         "name": "Cursor AI Editor",
         "icon": "Box"
+      },
+      {
+        "name": "Claude AI",
+        "icon": "Brain"
       },
       {
         "name": "Git",

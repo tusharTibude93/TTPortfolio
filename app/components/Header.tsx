@@ -15,6 +15,7 @@ export default function Header() {
             <Link href="/#skills" className="text-slate-600 hover:text-blue-600 transition-colors">Skills</Link>
             <Link href="/#hobbies" className="text-slate-600 hover:text-blue-600 transition-colors">Hobbies</Link>
             <Link href="/projects" className="text-slate-600 hover:text-blue-600 transition-colors">Projects</Link>
+            <Link href="/performance" className="text-slate-600 hover:text-blue-600 transition-colors">Performance</Link>
             {/* <a href="#education" className="text-slate-600 hover:text-blue-600 transition-colors">Education</a> */}
             <Link href="/resume" className="text-slate-600 hover:text-blue-600 transition-colors">Resume</Link>
             <Link href="/#contact" className="text-slate-600 hover:text-blue-600 transition-colors">Contact</Link>

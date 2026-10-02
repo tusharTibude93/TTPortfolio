@@ -1,0 +1,85 @@
+{
+  "title": "Performance Highlights",
+  "description": "Key accomplishments and technical contributions",
+  "highlights": [
+    {
+      "id": 1,
+      "category": "Predictable Delivery & Execution Ownership",
+      "rating": "Transformational Impact",
+      "achievements": [
+        {
+          "title": "Consistent Sprint Delivery",
+          "description": "Maintained ~95% sprint completion rate across cycles, clearing all assigned commitments while exceeding delivery thresholds"
+        },
+        {
+          "title": "Core Platform Ownership",
+          "description": "Owned PMO Dashboard, Project Management suite (Billing Milestones, Budget Reviews, Lessons Learned reporting), and SOW/Order Tracking umbrella end-to-end"
+        },
+        {
+          "title": "Solo-Engineered Modules",
+          "description": "Architected, built, and shipped 10+ core modules independently: Configuration Management, Inventory Management, Ticket Management, Documentation, Product Catalog, Sales Activity, Renewals, Settings, Purchase Orders, and Client360"
+        },
+        {
+          "title": "Flagship Client Experience Module",
+          "description": "Founded and built the Client Experience module end-to-end from architecture through launch, earning direct client recognition and performance bonus"
+        },
+        {
+          "title": "Production Availability",
+          "description": "Maintained proactive operational ownership with direct participation in late-night escalations, triaging and resolving live incidents without business disruption"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Engineering Quality & Technical Depth",
+      "rating": "Business Builder",
+      "achievements": [
+        {
+          "title": "API & System Performance",
+          "description": "Engineered centralized Recipients API to eliminate redundant email-generation requests; integrated Vite compression plugins and optimized chart rendering for reduced bundle growth"
+        },
+        {
+          "title": "Runtime Resilience",
+          "description": "Hardened third-party integrations by refactoring DocuSign error discrimination with explicit Axios error guards and resolved complex TinyMCE asynchronous loading race conditions"
+        },
+        {
+          "title": "Codebase Refactoring",
+          "description": "Consolidated fractured DataTable export logic into unified utility; cleaned up legacy hooks across application with wide domain breadth spanning permissions, inventory, procurement, quoting, and analytics"
+        },
+        {
+          "title": "Frontend Unit Testing Foundation",
+          "description": "Established formal frontend unit testing suite, providing scalable foundation for regression-free releases and greater delivery confidence"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Architecture, Security & Cloud Excellence",
+      "rating": "Business Builder",
+      "achievements": [
+        {
+          "title": "System Architecture Leadership",
+          "description": "Served as primary structural architect for core platform suites (PMO, Project Management, SOW/Order Tracking). Architected modular tab composition pattern for Quote Details and designed Client Experience module from ground up"
+        },
+        {
+          "title": "Client-Side Security Enhancement",
+          "description": "Mitigated plaintext credential exposure in authentication pipeline by implementing client-side public-key password encryption paired with backend middleware updates"
+        },
+        {
+          "title": "Granular Authorization Implementation",
+          "description": "Implemented permission-based dynamic UI rendering across Settings ecosystem, establishing unified access gating for sensitive administrative and ERP configurations"
+        },
+        {
+          "title": "Deep Architectural Debugging",
+          "description": "Diagnosed and eliminated compound UI conflict between ShadCN/Radix Dialogs and legacy Bootstrap Modals; validated fixes through regression testing and codified solution into extensible base modal component"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "modulesBuilt": "10+",
+    "sprintCompletion": "~95%",
+    "clientSatisfactionAward": true,
+    "engineeringGuidesCreated": 2
+  }
+}

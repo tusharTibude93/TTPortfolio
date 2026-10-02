@@ -41,6 +41,7 @@ import {
   Fan,
   Box,
   Worm,
+  Brain,
   GraduationCap,
   Briefcase,
   Calendar,
@@ -88,6 +89,7 @@ const iconMap = {
   Baby,
   Box,
   Fan,
+  Brain,
   Worm,
   GraduationCap,
   Briefcase,
@@ -153,6 +155,20 @@ export default function Home() {
               <p className="text-lg text-slate-600 mb-6">
                 {personalData.about.paragraph2}
               </p>
+
+              <div className="mt-8 mb-8">
+                <h3 className="text-2xl font-bold text-slate-800 mb-5">{personalData.about.highlightsTitle}</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {personalData.about.highlights.map((highlight, index) => (
+                    <div key={index} className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-2">{highlight.label}</p>
+                      <p className="text-2xl font-bold text-slate-800 mb-2">{highlight.value}</p>
+                      <p className="text-sm text-slate-600 leading-relaxed">{highlight.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <a
                   href={personalData.social.github.url}
