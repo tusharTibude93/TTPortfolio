@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--no-webstorage' next dev",
-    "build": "NODE_OPTIONS='--no-webstorage' next build",
-    "start": "NODE_OPTIONS='--no-webstorage' next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
+  },
+  "engines": {
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.3.0",
